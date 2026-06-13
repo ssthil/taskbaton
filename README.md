@@ -1,4 +1,4 @@
-# 🪄 taskbaton
+<h1 align="center">🪄 taskbaton</h1>
 
 <p align="center">
   <strong>Pass the baton. Every agent picks up exactly where the last one left off.</strong><br/>
