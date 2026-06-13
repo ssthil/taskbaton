@@ -162,9 +162,35 @@ A machine-readable `.baton/current.json` is always generated alongside it.
 
 ## MCP server
 
-`taskbaton mcp` starts a [Model Context Protocol](https://modelcontextprotocol.io) server over stdio. Register it once in your MCP host config and every agent in that project reads baton state as native context — no copy-paste required.
+Without MCP, every incoming agent has to manually read `.baton/current.md` or run `taskbaton export` to pick up context. With `taskbaton mcp`, baton state is native context — the agent reads it like any other resource, automatically, at session start.
 
-**Claude Code** (`~/.claude/claude_desktop_config.json`):
+```
+Agent session starts
+        │
+        ▼
+MCP host reads baton://current    ← stage, decisions, next tasks, constraints
+        │
+        ▼
+Agent knows exactly where to start — no copy-paste, no manual read
+        │
+        ▼
+  ... does the work ...
+        │
+        ▼
+taskbaton seal --from <tool> --next <tool>   ← human gates the handover
+        │
+        ▼
+Next agent reads updated baton://current automatically
+```
+
+**Setup**
+
+Claude Code — add once per project:
+```bash
+claude mcp add taskbaton taskbaton mcp
+```
+
+Or add to `.mcp.json` in your project root (works with any MCP-compatible host):
 ```json
 {
   "mcpServers": {
