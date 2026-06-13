@@ -64,7 +64,7 @@ Human is the checkpoint at every `seal`. Agent drafts, human confirms, baton pas
 
 **Homebrew (macOS / Linux)**
 ```bash
-brew tap ssthil/taskbaton
+brew tap ssthil/senthil-tools
 brew install taskbaton
 ```
 

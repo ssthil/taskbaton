@@ -55,6 +55,20 @@ changelog:
       - "^chore:"
       - "Merge pull request"
 
+brews:
+  - name: taskbaton
+    repository:
+      owner: ssthil
+      name: homebrew-senthil-tools
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    homepage: "https://github.com/ssthil/taskbaton"
+    description: "Pass work state between agentic tool sessions"
+    license: "MIT"
+    install: |
+      bin.install "taskbaton"
+    test: |
+      system "#{bin}/taskbaton", "--version"
+
 release:
   draft: false
   prerelease: auto
