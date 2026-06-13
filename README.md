@@ -17,6 +17,10 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-3b82f6?style=flat-square&labelColor=1a1a1a" alt="License: MIT"/></a>
 </p>
 
+<p align="center">
+  <img src="docs/flow.svg" alt="taskbaton flow: AI Tool drafts → .baton/ → Human seals → Next Agent picks up" width="800"/>
+</p>
+
 ---
 
 ## Every Agent Starts Blind. Until Now.
@@ -154,6 +158,7 @@ A machine-readable `.baton/current.json` is always generated alongside it.
 | `taskbaton new <stage>` | Create a new open baton stage |
 | `taskbaton review` | Open `.baton/current.md` in `$EDITOR` |
 | `taskbaton seal --from <tool> --next <tool>` | Seal, stamp, and archive the current baton |
+| `taskbaton checkpoint` | Save current state mid-session without sealing |
 | `taskbaton next` | Print next tasks for the incoming agent |
 | `taskbaton status` | Show current stage and seal state |
 | `taskbaton log` | List all archived baton stages |

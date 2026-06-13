@@ -5,10 +5,25 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/ssthil/taskbaton/internal/baton"
 )
+
+// openDuration returns elapsed time since the baton was created.
+// Falls back to file mtime for batons without a CreatedAt field.
+func openDuration(batonDir string, b baton.Baton) time.Duration {
+	if b.CreatedAt != "" {
+		if t, err := time.Parse(time.RFC3339, b.CreatedAt); err == nil {
+			return time.Since(t)
+		}
+	}
+	if fi, err := os.Stat(filepath.Join(batonDir, "current.json")); err == nil {
+		return time.Since(fi.ModTime())
+	}
+	return 0
+}
 
 func newStatusCmd() *cobra.Command {
 	return &cobra.Command{
@@ -44,6 +59,15 @@ func runStatusCmd(out io.Writer) error {
 	}
 	if b.SealedAt != "" {
 		fmt.Fprintf(out, "  %-8s %s\n", "Sealed:", b.SealedAt)
+	}
+
+	if b.Status == "open" {
+		elapsed := openDuration(batonDir, b)
+		if elapsed >= 45*time.Minute {
+			fmt.Fprintln(out)
+			warn(out, "session open for %d min — consider saving a checkpoint", int(elapsed.Minutes()))
+			note(out, "run: taskbaton checkpoint")
+		}
 	}
 	return nil
 }

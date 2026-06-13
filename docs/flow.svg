@@ -1,0 +1,90 @@
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="taskbaton flow diagram">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" rx="16" fill="#f8fafc"/>
+
+  <!-- Top label -->
+  <text x="400" y="30" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="12" fill="#94a3b8" letter-spacing="0.3">
+    agent drafts · human confirms · baton passes · nothing gets lost
+  </text>
+
+  <!-- ── Box 1: AI Tool ── -->
+  <rect x="22" y="50" width="158" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="101" y="84" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="14" font-weight="700" fill="#1d4ed8">AI Tool</text>
+  <text x="101" y="103" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#60a5fa">Cursor · Claude Code</text>
+  <text x="101" y="119" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#60a5fa">Codex · Gemini CLI</text>
+
+  <!-- Arrow 1 -->
+  <line x1="183" y1="95" x2="210" y2="95" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="196" y="88" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="10" fill="#94a3b8">draft</text>
+
+  <!-- ── Box 2: .baton/ ── -->
+  <rect x="214" y="50" width="158" height="90" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="293" y="84" text-anchor="middle"
+    font-family="ui-mono,SFMono-Regular,Menlo,monospace"
+    font-size="14" font-weight="700" fill="#15803d">.baton/</text>
+  <text x="293" y="103" text-anchor="middle"
+    font-family="ui-mono,SFMono-Regular,Menlo,monospace"
+    font-size="11" fill="#4ade80">current.md</text>
+  <text x="293" y="119" text-anchor="middle"
+    font-family="ui-mono,SFMono-Regular,Menlo,monospace"
+    font-size="11" fill="#4ade80">current.json</text>
+
+  <!-- Arrow 2 -->
+  <line x1="375" y1="95" x2="402" y2="95" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="388" y="88" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="10" fill="#94a3b8">review</text>
+
+  <!-- ── Box 3: Human ✓ ── -->
+  <rect x="406" y="50" width="158" height="90" rx="12" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="485" y="84" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="14" font-weight="700" fill="#92400e">Human ✓</text>
+  <text x="485" y="103" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#f59e0b">confirms · edits</text>
+  <text x="485" y="119" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#f59e0b">runs taskbaton seal</text>
+
+  <!-- Arrow 3 -->
+  <line x1="567" y1="95" x2="594" y2="95" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="580" y="88" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="10" fill="#94a3b8">seal</text>
+
+  <!-- ── Box 4: Next Agent ── -->
+  <rect x="598" y="50" width="180" height="90" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="688" y="84" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="14" font-weight="700" fill="#1d4ed8">Next Agent</text>
+  <text x="688" y="103" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#60a5fa">reads .baton/current.md</text>
+  <text x="688" y="119" text-anchor="middle"
+    font-family="ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+    font-size="11" fill="#60a5fa">picks up exactly here</text>
+
+  <!-- Bottom commands bar -->
+  <text x="400" y="170" text-anchor="middle"
+    font-family="ui-mono,SFMono-Regular,Menlo,monospace"
+    font-size="11" fill="#cbd5e1">
+    taskbaton new  ·  review  ·  checkpoint  ·  seal  ·  next  ·  status  ·  mcp
+  </text>
+</svg>

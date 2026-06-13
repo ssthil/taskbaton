@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/ssthil/taskbaton/internal/template"
 )
@@ -15,7 +16,8 @@ type Baton struct {
 	Stage         string   `json:"stage"`
 	Status        string   `json:"status"` // "open" | "sealed"
 	From          string   `json:"from_tool"`
-	SealedAt      string   `json:"sealed_at"` // RFC3339 or ""
+	CreatedAt     string   `json:"created_at"` // RFC3339, set once on New()
+	SealedAt      string   `json:"sealed_at"`  // RFC3339 or ""
 	Next          string   `json:"next_tool"`
 	Completed     []string `json:"completed"`
 	Decisions     []string `json:"decisions"`
@@ -30,6 +32,7 @@ func New(stage string) Baton {
 	return Baton{
 		Stage:         stage,
 		Status:        "open",
+		CreatedAt:     time.Now().Format(time.RFC3339),
 		Completed:     []string{},
 		Decisions:     []string{},
 		NextTasks:     []string{},
@@ -73,6 +76,7 @@ func Write(batonDir string, b Baton) error {
 		Stage:         b.Stage,
 		Status:        b.Status,
 		From:          b.From,
+		CreatedAt:     b.CreatedAt,
 		SealedAt:      b.SealedAt,
 		Next:          b.Next,
 		Completed:     b.Completed,

@@ -10,6 +10,7 @@ type RenderData struct {
 	Stage         string
 	Status        string
 	From          string
+	CreatedAt     string
 	SealedAt      string
 	Next          string
 	Completed     []string
@@ -23,6 +24,9 @@ const batonTemplate = `# Baton — {{.Stage}}
 
 **Stage**: {{.Stage}}
 **Status**: {{.Status}}
+{{- if .CreatedAt}}
+**Created**: {{.CreatedAt}}
+{{- end}}
 {{- if .From}}
 **From**: {{.From}}
 {{- end}}

@@ -2,6 +2,13 @@
 
 All notable changes to taskbaton are documented here.
 
+## [0.3.0] - 2026-06-13
+
+### Added
+- `taskbaton checkpoint` — mid-session draft save without sealing or archiving; persists current state so a usage-wall doesn't leave the human with a blank template
+- Session duration nudge in `taskbaton status` — warns after 45 min if a baton is still open, with a reminder to checkpoint
+- `created_at` field on every new baton (RFC3339); used for accurate session duration tracking with fallback to file mtime for older batons
+
 ## [0.2.0] - 2026-06-13
 
 ### Added
