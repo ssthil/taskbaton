@@ -13,9 +13,9 @@ import (
 // Baton is the in-memory representation of .baton/current.md + current.json.
 type Baton struct {
 	Stage         string   `json:"stage"`
-	Status        string   `json:"status"`     // "open" | "sealed"
+	Status        string   `json:"status"` // "open" | "sealed"
 	From          string   `json:"from_tool"`
-	SealedAt      string   `json:"sealed_at"`  // RFC3339 or ""
+	SealedAt      string   `json:"sealed_at"` // RFC3339 or ""
 	Next          string   `json:"next_tool"`
 	Completed     []string `json:"completed"`
 	Decisions     []string `json:"decisions"`
