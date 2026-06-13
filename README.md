@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="https://github.com/ssthil/taskbaton/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ssthil/taskbaton/ci.yml?branch=main&style=flat-square&label=CI&labelColor=1a1a1a" alt="CI"/></a>
-  <a href="https://github.com/ssthil/taskbaton/releases"><img src="https://img.shields.io/badge/release-v0.1.0-blue?style=flat-square&labelColor=1a1a1a" alt="release"/></a>
+  <a href="https://github.com/ssthil/taskbaton/releases"><img src="https://img.shields.io/badge/release-v0.2.0-blue?style=flat-square&labelColor=1a1a1a" alt="release"/></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-3b82f6?style=flat-square&labelColor=1a1a1a" alt="License: MIT"/></a>
 </p>
 
