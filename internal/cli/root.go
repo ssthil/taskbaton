@@ -43,6 +43,7 @@ it passes — the human stays the checkpoint between every stage.`,
 	root.AddCommand(newStatusCmd())
 	root.AddCommand(newLogCmd())
 	root.AddCommand(newExportCmd())
+	root.AddCommand(newMCPCmd())
 	return root
 }
 

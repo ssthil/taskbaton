@@ -158,6 +158,39 @@ A machine-readable `.baton/current.json` is always generated alongside it.
 | `taskbaton status` | Show current stage and seal state |
 | `taskbaton log` | List all archived baton stages |
 | `taskbaton export` | Output current baton as JSON |
+| `taskbaton mcp` | Start the MCP server (stdio transport) |
+
+## MCP server
+
+`taskbaton mcp` starts a [Model Context Protocol](https://modelcontextprotocol.io) server over stdio. Register it once in your MCP host config and every agent in that project reads baton state as native context — no copy-paste required.
+
+**Claude Code** (`~/.claude/claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "taskbaton": {
+      "command": "taskbaton",
+      "args": ["mcp"]
+    }
+  }
+}
+```
+
+**Resources exposed:**
+
+| URI | Content |
+|---|---|
+| `baton://current` | Full `.baton/current.md` (Markdown) |
+| `baton://current.json` | Structured baton state (JSON) |
+| `baton://history` | Archived stage list |
+
+**Tools exposed:**
+
+| Tool | Returns |
+|---|---|
+| `get_status` | Stage name + seal state |
+| `get_next_tasks` | Next Tasks list |
+| `get_constraints` | Constraints — Do Not Change list |
 
 ## AGENTS.md convention
 

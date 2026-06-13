@@ -2,6 +2,14 @@
 
 All notable changes to taskbaton are documented here.
 
+## [0.2.0] - 2026-06-13
+
+### Added
+- `taskbaton mcp` — MCP server over stdio; exposes baton state as native context to Claude Code and other MCP hosts
+- Resources: `baton://current` (Markdown), `baton://current.json`, `baton://history`
+- Tools: `get_status`, `get_next_tasks`, `get_constraints`
+- Homebrew tap via `brew tap ssthil/senthil-tools`
+
 ## [0.1.0] - 2026-06-09
 
 ### Added
