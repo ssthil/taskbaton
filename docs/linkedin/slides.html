@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080">
+  <title>taskbaton — LinkedIn Carousel Slides</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #cbd5e1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .slide {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .brand {
+      position: absolute;
+      bottom: 36px;
+      left: 48px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .slide-num {
+      position: absolute;
+      bottom: 36px;
+      right: 48px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 1 — Dark scroll-stopper
+    ══════════════════════════════════════ */
+    .s1 { background: #0f172a; }
+
+    .s1 .eyebrow {
+      position: absolute;
+      top: 72px; left: 80px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: #38bdf8;
+    }
+    .s1 .headline {
+      position: absolute;
+      top: 140px; left: 80px; right: 80px;
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: #f8fafc;
+      letter-spacing: -3px;
+    }
+    .s1 .subtext {
+      position: absolute;
+      top: 560px; left: 80px; right: 80px;
+      font-size: 30px;
+      line-height: 1.65;
+      color: #94a3b8;
+    }
+    .s1 .cta-line {
+      position: absolute;
+      bottom: 110px; left: 80px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .s1 .brand { color: #334155; }
+    .s1 .slide-num { color: #334155; }
+
+    /* ══════════════════════════════════════
+       SLIDE 2 — Meet taskbaton + flow
+    ══════════════════════════════════════ */
+    .s2 { background: #f8fafc; }
+
+    .s2 .headline {
+      position: absolute;
+      top: 68px; left: 0; right: 0;
+      text-align: center;
+      font-size: 60px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -2px;
+    }
+    .s2 .subtext {
+      position: absolute;
+      top: 172px; left: 80px; right: 80px;
+      text-align: center;
+      font-size: 25px;
+      line-height: 1.55;
+      color: #64748b;
+    }
+    .s2 .flow-row {
+      position: absolute;
+      top: 320px; left: 52px; right: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 540px;
+    }
+    .fb {
+      width: 192px;
+      height: 260px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 0 16px;
+      text-align: center;
+    }
+    .fb-title { font-size: 22px; font-weight: 800; display: block; }
+    .fb-sub { font-size: 16px; line-height: 1.6; display: block; }
+
+    .fb-tool { background: #eff6ff; border: 2px solid #bfdbfe; }
+    .fb-tool .fb-title { color: #1d4ed8; }
+    .fb-tool .fb-sub   { color: #60a5fa; }
+
+    .fb-baton { background: #f0fdf4; border: 2px solid #bbf7d0; }
+    .fb-baton .fb-title { color: #15803d; font-family: ui-monospace, monospace; font-size: 20px; }
+    .fb-baton .fb-sub   { color: #4ade80; font-family: ui-monospace, monospace; }
+
+    .fb-human { background: #fffbeb; border: 2px solid #fde68a; }
+    .fb-human .fb-title { color: #92400e; }
+    .fb-human .fb-sub   { color: #f59e0b; }
+
+    .fa {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #94a3b8;
+    }
+    .fa-label { font-size: 15px; font-weight: 600; }
+    .fa-line {
+      width: 52px; height: 2px;
+      background: #cbd5e1;
+      position: relative;
+    }
+    .fa-line::after {
+      content: '';
+      position: absolute;
+      right: -1px; top: -4px;
+      border-left: 9px solid #cbd5e1;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    .s2 .tagline {
+      position: absolute;
+      bottom: 72px; left: 0; right: 0;
+      text-align: center;
+      font-size: 20px;
+      color: #94a3b8;
+      font-style: italic;
+    }
+    .s2 .brand { color: #94a3b8; }
+    .s2 .slide-num { color: #94a3b8; }
+
+    /* ══════════════════════════════════════
+       SLIDE 3 — Baton format
+    ══════════════════════════════════════ */
+    .s3 { background: #f0fdf4; }
+
+    .s3 .headline {
+      position: absolute;
+      top: 68px; left: 80px; right: 80px;
+      font-size: 50px;
+      font-weight: 900;
+      color: #14532d;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+    }
+    .s3 .code-block {
+      position: absolute;
+      top: 230px; left: 80px; right: 80px;
+      background: #ffffff;
+      border: 2px solid #bbf7d0;
+      border-radius: 18px;
+      padding: 36px 44px;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 21px;
+      line-height: 1.75;
+      color: #1e293b;
+    }
+    .cc  { color: #94a3b8; }
+    .ck  { color: #15803d; font-weight: 700; }
+    .cv  { color: #1d4ed8; }
+    .cs  { color: #92400e; font-weight: 800; }
+    .ci  { color: #374151; }
+
+    .s3 .caption {
+      position: absolute;
+      bottom: 80px; left: 80px; right: 80px;
+      font-size: 22px;
+      color: #166534;
+      font-style: italic;
+      line-height: 1.55;
+    }
+    .s3 .brand { color: #86efac; }
+    .s3 .slide-num { color: #86efac; }
+
+    /* ══════════════════════════════════════
+       SLIDE 4 — Checkpoint
+    ══════════════════════════════════════ */
+    .s4 { background: #fffbeb; }
+
+    .s4 .headline {
+      position: absolute;
+      top: 68px; left: 80px; right: 80px;
+      font-size: 58px;
+      font-weight: 900;
+      color: #78350f;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .s4 .subtext {
+      position: absolute;
+      top: 320px; left: 80px; right: 80px;
+      font-size: 27px;
+      line-height: 1.6;
+      color: #92400e;
+    }
+    .s4 .terminal {
+      position: absolute;
+      top: 490px; left: 80px; right: 80px;
+      background: #0f172a;
+      border-radius: 18px;
+      padding: 36px 44px;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 22px;
+      line-height: 1.9;
+    }
+    .tp { color: #4ade80; }
+    .tc { color: #f8fafc; font-weight: 700; }
+    .to { color: #94a3b8; }
+    .tn { color: #475569; font-size: 19px; }
+
+    .s4 .bottom-note {
+      position: absolute;
+      bottom: 80px; left: 80px; right: 80px;
+      font-size: 22px;
+      color: #b45309;
+    }
+    .s4 .brand { color: #fcd34d; }
+    .s4 .slide-num { color: #fcd34d; }
+
+    /* ══════════════════════════════════════
+       SLIDE 5 — MCP Server
+    ══════════════════════════════════════ */
+    .s5 { background: #eff6ff; }
+
+    .s5 .headline {
+      position: absolute;
+      top: 68px; left: 80px; right: 80px;
+      font-size: 56px;
+      font-weight: 900;
+      color: #1e3a8a;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .s5 .subtext {
+      position: absolute;
+      top: 310px; left: 80px; right: 80px;
+      font-size: 26px;
+      line-height: 1.6;
+      color: #1d4ed8;
+    }
+    .s5 .code-block {
+      position: absolute;
+      top: 490px; left: 80px; right: 80px;
+      background: #1e3a8a;
+      border-radius: 18px;
+      padding: 36px 44px;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 22px;
+      line-height: 1.9;
+      color: #bfdbfe;
+    }
+    .jk { color: #7dd3fc; }
+    .jv { color: #6ee7b7; }
+
+    .s5 .res-row {
+      position: absolute;
+      bottom: 78px; left: 80px; right: 80px;
+      display: flex;
+      gap: 14px;
+    }
+    .res-tag {
+      background: #dbeafe;
+      border: 2px solid #93c5fd;
+      border-radius: 8px;
+      padding: 9px 22px;
+      font-family: ui-monospace, monospace;
+      font-size: 18px;
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+    .s5 .brand { color: #93c5fd; }
+    .s5 .slide-num { color: #93c5fd; }
+
+    /* ══════════════════════════════════════
+       SLIDE 6 — CTA
+    ══════════════════════════════════════ */
+    .s6 { background: #ffffff; }
+
+    .s6 .headline {
+      position: absolute;
+      top: 68px; left: 0; right: 0;
+      text-align: center;
+      font-size: 56px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -2px;
+    }
+    .s6 .install-block {
+      position: absolute;
+      top: 200px; left: 80px; right: 80px;
+      background: #0f172a;
+      border-radius: 18px;
+      padding: 40px 52px;
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      font-size: 26px;
+      line-height: 2.1;
+    }
+    .ip { color: #4ade80; }
+    .ic { color: #f8fafc; }
+    .ix { color: #475569; font-size: 20px; }
+
+    .s6 .gh-link {
+      position: absolute;
+      top: 520px; left: 0; right: 0;
+      text-align: center;
+      font-size: 34px;
+      font-weight: 800;
+      color: #1d4ed8;
+    }
+    .s6 .tagline {
+      position: absolute;
+      top: 600px; left: 0; right: 0;
+      text-align: center;
+      font-size: 22px;
+      color: #64748b;
+      font-style: italic;
+    }
+    .s6 .suite-row {
+      position: absolute;
+      top: 700px; left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .st {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-size: 18px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .st.active {
+      background: #1d4ed8;
+      color: #ffffff;
+    }
+    .s6 .cta-final {
+      position: absolute;
+      bottom: 110px; left: 0; right: 0;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .s6 .brand { color: #94a3b8; }
+    .s6 .slide-num { color: #94a3b8; }
+
+    /* Print: one slide per PDF page */
+    @media print {
+      body { background: none; padding: 0; gap: 0; }
+      .slide { border-radius: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ SLIDE 1 ══ -->
+  <div class="slide s1">
+    <div class="eyebrow">Developer Tools · 2026</div>
+    <div class="headline">Every time<br>you switch<br>AI tools,<br>your context<br>disappears.</div>
+    <div class="subtext">
+      Cursor planned it. Claude Code built it.<br>
+      Codex is reviewing it.<br><br>
+      Every new session starts completely blind.<br>
+      Decisions forgotten. Work redone.
+    </div>
+    <div class="cta-line">There's a fix &nbsp;→</div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">1 / 6</div>
+  </div>
+
+  <!-- ══ SLIDE 2 ══ -->
+  <div class="slide s2">
+    <div class="headline">Meet taskbaton</div>
+    <div class="subtext">
+      A CLI that carries work state between agentic tool sessions.<br>
+      Any agent reads <code style="background:#e2e8f0;padding:2px 10px;border-radius:6px;font-family:monospace;font-size:23px">.baton/current.md</code> and picks up exactly where the last left off.
+    </div>
+    <div class="flow-row">
+      <div class="fb fb-tool">
+        <span class="fb-title">AI Tool</span>
+        <span class="fb-sub">Cursor<br>Claude Code<br>Codex<br>Gemini CLI</span>
+      </div>
+      <div class="fa"><span class="fa-label">draft</span><div class="fa-line"></div></div>
+      <div class="fb fb-baton">
+        <span class="fb-title">.baton/</span>
+        <span class="fb-sub">current.md<br>current.json</span>
+      </div>
+      <div class="fa"><span class="fa-label">review</span><div class="fa-line"></div></div>
+      <div class="fb fb-human">
+        <span class="fb-title">Human ✓</span>
+        <span class="fb-sub">confirms<br>&amp; seals<br>the gate</span>
+      </div>
+      <div class="fa"><span class="fa-label">seal</span><div class="fa-line"></div></div>
+      <div class="fb fb-tool">
+        <span class="fb-title">Next Agent</span>
+        <span class="fb-sub">reads .baton/<br>picks up<br>exactly here</span>
+      </div>
+    </div>
+    <div class="tagline">Human is the checkpoint at every seal — agent drafts, human confirms, baton passes.</div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">2 / 6</div>
+  </div>
+
+  <!-- ══ SLIDE 3 ══ -->
+  <div class="slide s3">
+    <div class="headline">What every agent<br>reads at session start</div>
+    <div class="code-block">
+      <span class="cc"># Baton — feature/auth</span><br><br>
+      <span class="ck">Stage:</span>&nbsp;&nbsp; <span class="cv">feature/auth</span><br>
+      <span class="ck">Status:</span>&nbsp; <span class="cv">sealed</span><br>
+      <span class="ck">From:</span>&nbsp;&nbsp;&nbsp; <span class="cv">claude-code</span> &nbsp;→&nbsp; Next: <span class="cv">cursor</span><br>
+      <br>
+      <span class="cs">## Decisions</span><br>
+      <span class="ci">- RS256 not HS256 — security team requirement</span><br>
+      <span class="ci">- Token expiry 15min/7d — no PM sign-off to change</span><br>
+      <br>
+      <span class="cs">## Next Tasks</span><br>
+      <span class="ci">- Implement RBAC on top of existing auth</span><br>
+      <span class="ci">- Start at src/middleware/rbac.go</span><br>
+      <br>
+      <span class="cs">## Constraints — Do Not Change</span><br>
+      <span class="ci">- src/middleware/auth.go — sealed by security review</span>
+    </div>
+    <div class="caption">Decisions with reasons. Constraints with context.<br>Nothing survives the handover without a why.</div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">3 / 6</div>
+  </div>
+
+  <!-- ══ SLIDE 4 ══ -->
+  <div class="slide s4">
+    <div class="headline">Free-tier usage<br>hit 100%?<br>You're covered.</div>
+    <div class="subtext">
+      <code style="background:#fde68a;padding:2px 12px;border-radius:6px;font-family:monospace;font-size:25px;color:#78350f">taskbaton checkpoint</code>&nbsp; saves your state mid-session.<br>
+      Switch to another tool — pick up from a draft, not a blank page.
+    </div>
+    <div class="terminal">
+      <span class="tp">$</span> <span class="tc">taskbaton checkpoint</span><br>
+      <span class="tp">✓</span> <span class="to">checkpoint saved at 22:14&nbsp;&nbsp;•&nbsp;&nbsp;stage: feature/auth&nbsp;&nbsp;•&nbsp;&nbsp;open 47 min</span><br>
+      <span class="tn">&nbsp;&nbsp;run taskbaton review to add notes · seal to finalize</span>
+    </div>
+    <div class="bottom-note">Works with any AI tool — Cursor · Claude Code · Codex · Gemini CLI</div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">4 / 6</div>
+  </div>
+
+  <!-- ══ SLIDE 5 ══ -->
+  <div class="slide s5">
+    <div class="headline">Agents read baton<br>state natively.<br>No copy-paste.</div>
+    <div class="subtext">
+      <code style="background:#dbeafe;padding:2px 12px;border-radius:6px;font-family:monospace;font-size:25px;color:#1e3a8a">taskbaton mcp</code>&nbsp; starts a Model Context Protocol server.<br>
+      Register once — every agent reads stage, decisions, next tasks &amp; constraints as native context.
+    </div>
+    <div class="code-block">
+      {<br>
+      &nbsp;&nbsp;<span class="jk">"mcpServers"</span>: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"taskbaton"</span>: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"command"</span>: <span class="jv">"taskbaton"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"args"</span>: [<span class="jv">"mcp"</span>]<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+    <div class="res-row">
+      <div class="res-tag">baton://current</div>
+      <div class="res-tag">baton://current.json</div>
+      <div class="res-tag">baton://history</div>
+    </div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">5 / 6</div>
+  </div>
+
+  <!-- ══ SLIDE 6 ══ -->
+  <div class="slide s6">
+    <div class="headline">Try it on your next project.</div>
+    <div class="install-block">
+      <span class="ip">$</span> <span class="ic">brew tap ssthil/senthil-tools</span><br>
+      <span class="ip">$</span> <span class="ic">brew install taskbaton</span><br>
+      <span class="ix"># or: go install github.com/ssthil/taskbaton@latest</span>
+    </div>
+    <div class="gh-link">github.com/ssthil/taskbaton</div>
+    <div class="tagline">Free · Open source · MIT license · v0.3.0</div>
+    <div class="suite-row">
+      <div class="st">human-steerkit</div>
+      <div class="st">llmroute</div>
+      <div class="st active">taskbaton ✓</div>
+    </div>
+    <div class="cta-final">⭐ Star it if this solves a real problem for you</div>
+    <div class="brand">taskbaton</div>
+    <div class="slide-num">6 / 6</div>
+  </div>
+
+</body>
+</html>
