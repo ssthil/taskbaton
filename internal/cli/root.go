@@ -40,6 +40,8 @@ it passes — the human stays the checkpoint between every stage.`,
 	root.AddCommand(newReviewCmd())
 	root.AddCommand(newSealCmd())
 	root.AddCommand(newCheckpointCmd())
+	root.AddCommand(newContextCmd())
+	root.AddCommand(newHooksCmd())
 	root.AddCommand(newNextCmd())
 	root.AddCommand(newStatusCmd())
 	root.AddCommand(newLogCmd())

@@ -33,17 +33,13 @@ The baton stays open. Edit it with 'taskbaton review', seal it with
 				return fmt.Errorf(".baton/ not found — run: taskbaton init")
 			}
 
-			b, err := baton.Read(batonDir)
+			b, sealed, err := saveCheckpoint(batonDir)
 			if err != nil {
 				return fmt.Errorf("no current baton — run: taskbaton new <stage> first")
 			}
-			if b.Status == "sealed" {
+			if sealed {
 				warn(out, "baton is already sealed — run: taskbaton new <stage> to start the next stage")
 				return nil
-			}
-
-			if err := baton.Write(batonDir, b); err != nil {
-				return err
 			}
 
 			elapsed := sessionAge(batonDir, b)
@@ -57,6 +53,24 @@ The baton stays open. Edit it with 'taskbaton review', seal it with
 			return nil
 		},
 	}
+}
+
+// saveCheckpoint persists the current open baton to disk without sealing it.
+// It returns the baton, whether it was already sealed (in which case nothing is
+// written), and any read/write error. Shared by the `checkpoint` command and the
+// session-end hook so both flush a draft the same way.
+func saveCheckpoint(batonDir string) (baton.Baton, bool, error) {
+	b, err := baton.Read(batonDir)
+	if err != nil {
+		return baton.Baton{}, false, err
+	}
+	if b.Status == "sealed" {
+		return b, true, nil
+	}
+	if err := baton.Write(batonDir, b); err != nil {
+		return b, false, err
+	}
+	return b, false, nil
 }
 
 // sessionAge returns a human-readable elapsed time since the baton was created.

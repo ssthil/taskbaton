@@ -60,7 +60,8 @@ func newInitCmd() *cobra.Command {
 			if author != "" {
 				info(out, "Author:  %s", author)
 			}
-			note(out, "Run %s to record your first task handoff.", bold("taskbaton push"))
+			note(out, "Run %s to record your first task handoff.", bold("taskbaton new <stage>"))
+			note(out, "Using Claude Code? Run %s to auto-inject the baton each session.", bold("taskbaton hooks install"))
 
 			return nil
 		},

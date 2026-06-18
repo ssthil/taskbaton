@@ -159,6 +159,8 @@ A machine-readable `.baton/current.json` is always generated alongside it.
 | `taskbaton review` | Open `.baton/current.md` in `$EDITOR` |
 | `taskbaton seal --from <tool> --next <tool>` | Seal, stamp, and archive the current baton |
 | `taskbaton checkpoint` | Save current state mid-session without sealing |
+| `taskbaton context` | Print baton context (constraints + next tasks) for an agent to pick up |
+| `taskbaton hooks install` | Wire taskbaton into Claude Code lifecycle hooks |
 | `taskbaton next` | Print next tasks for the incoming agent |
 | `taskbaton status` | Show current stage and seal state |
 | `taskbaton log` | List all archived baton stages |
@@ -222,6 +224,42 @@ Or add to `.mcp.json` in your project root (works with any MCP-compatible host):
 | `get_status` | Stage name + seal state |
 | `get_next_tasks` | Next Tasks list |
 | `get_constraints` | Constraints — Do Not Change list |
+
+## Hooks — automatic pickup, no discipline required
+
+The baton only works if someone reads it at the start and saves it at the end.
+Hooks make that automatic. They fire on the harness's lifecycle events, **outside
+the model**, at zero token cost in the capture path — so nothing depends on the
+agent or developer remembering.
+
+| Lifecycle event | What taskbaton does | Why |
+|---|---|---|
+| **Session start** | Injects constraints + next tasks into the agent | The agent never starts blind |
+| **Every prompt** | Re-surfaces the *Constraints — Do Not Change* block | Stops mid-session drift from sealed decisions |
+| **Session end** | Flushes the current draft (like `checkpoint`) | Work state is never lost on exit |
+
+Sealing stays human-gated — hooks never seal. The agent still drafts, you still
+review and `seal`. Hooks only automate *reading* and *checkpointing*.
+
+**Claude Code** — one command merges into `.claude/settings.json` (existing
+settings are preserved; re-running is idempotent):
+
+```bash
+taskbaton hooks install
+# undo with: taskbaton hooks uninstall
+```
+
+**Cursor / Codex** (or any harness with lifecycle hooks) — print the snippet and
+paste it into that tool's hook config; the same `taskbaton hooks run …` commands
+work underneath:
+
+```bash
+taskbaton hooks install --print
+```
+
+The portable core is `taskbaton context` — a plain-text summary of the current
+baton that prints nothing (and exits 0) when no baton exists, so it is safe to
+call unconditionally. Hooks wrap it in each harness's expected output format.
 
 ## AGENTS.md convention
 

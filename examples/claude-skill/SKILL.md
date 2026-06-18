@@ -2,6 +2,12 @@
 
 Copy this file to `~/.claude/skills/taskbaton/SKILL.md` to enable it in Claude Code.
 
+> **Tip:** Run `taskbaton hooks install` once per project to automate the start-read
+> and end-checkpoint steps below — hooks inject baton context at session start,
+> re-surface constraints on every prompt, and flush the draft on exit. The steps
+> here still apply (and are the fallback when hooks aren't installed); only `seal`
+> ever requires the human.
+
 ## On session start
 1. Run: `taskbaton status`
 2. If a sealed baton exists, read `.baton/current.md` fully before touching code

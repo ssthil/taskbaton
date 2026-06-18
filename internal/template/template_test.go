@@ -98,3 +98,53 @@ func TestRenderOptionalFieldsOmitted(t *testing.T) {
 		}
 	}
 }
+
+func TestRenderContextFull(t *testing.T) {
+	out := RenderContext(RenderData{
+		Stage:       "feature/auth",
+		Status:      "sealed",
+		From:        "claude-code",
+		Next:        "cursor",
+		Constraints: []string{"keep tokens in Redis"},
+		NextTasks:   []string{"implement RBAC"},
+	}, false)
+
+	for _, want := range []string{
+		"feature/auth", "claude-code", "cursor",
+		"Constraints — Do Not Change:", "- keep tokens in Redis",
+		"Next Tasks:", "- implement RBAC",
+	} {
+		if !strings.Contains(out, want) {
+			t.Errorf("context output missing %q:\n%s", want, out)
+		}
+	}
+	if strings.Contains(out, "\x1b[") {
+		t.Errorf("context output must be plain (no ANSI):\n%q", out)
+	}
+}
+
+func TestRenderContextConstraintsOnly(t *testing.T) {
+	out := RenderContext(RenderData{
+		Stage:       "s",
+		Constraints: []string{"do not touch auth.go"},
+		NextTasks:   []string{"this should not appear"},
+	}, true)
+
+	if !strings.Contains(out, "do not touch auth.go") {
+		t.Errorf("constraints-only output missing the constraint:\n%s", out)
+	}
+	if strings.Contains(out, "this should not appear") {
+		t.Errorf("constraints-only output must not include next tasks:\n%s", out)
+	}
+}
+
+func TestRenderContextEmptyIsBlank(t *testing.T) {
+	// No constraints and no next tasks → nothing worth injecting.
+	if out := RenderContext(RenderData{Stage: "s", Status: "open"}, false); out != "" {
+		t.Errorf("expected empty context for empty baton, got:\n%q", out)
+	}
+	// Constraints-only with no constraints → blank too.
+	if out := RenderContext(RenderData{Stage: "s", NextTasks: []string{"x"}}, true); out != "" {
+		t.Errorf("expected empty constraints-only output, got:\n%q", out)
+	}
+}

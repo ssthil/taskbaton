@@ -2,6 +2,18 @@
 
 All notable changes to taskbaton are documented here.
 
+## [Unreleased]
+
+### Added
+- `taskbaton hooks install` — wire taskbaton into Claude Code lifecycle hooks (merges into `.claude/settings.json`, idempotent, preserves existing settings); `--print` emits the snippet for Cursor/Codex
+- `taskbaton hooks uninstall` — surgically remove only taskbaton's hook entries
+- Hook behaviours: inject constraints + next tasks at session start, re-surface *Constraints — Do Not Change* on every prompt, flush the draft on session end. Sealing stays human-gated
+- `taskbaton context` — plain-text baton summary for agent pickup; prints nothing and exits 0 when no baton exists, so it is safe to call unconditionally
+- `examples/hooks/` — Cursor/Codex/manual snippets
+
+### Fixed
+- `taskbaton init` post-init hint pointed at a nonexistent `taskbaton push` command; now points at `taskbaton new <stage>`
+
 ## [0.3.0] - 2026-06-13
 
 ### Added
